@@ -12,15 +12,12 @@ const checkValidFields = (req, res, next) => {
 const checkEmail = async (req, res, next) => {
   const { email } = req.body;
   const validEmail = /^[\w.]+@[a-z]+\.\w{2,3}$/g.test(email);
-  const verifyEmail = await usersService.getEmail(email);
-
-  console.log(validEmail);
+  const verifyEmail = await usersService.getUserByEmail(email);
 
   if (!validEmail) {
     return res.status(400).json({ message: 'Invalid entries. Try again.' });
   }
   
-  console.log(verifyEmail);
   if (verifyEmail) {
     return res.status(409).json({ message: 'Email already registered' });
   }

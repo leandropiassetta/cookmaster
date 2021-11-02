@@ -6,13 +6,20 @@ const createUser = async (email, password, name) => {
   return newUser;
 };
 
-const getEmail = async (email) => {
-  const verifyEmail = await usersModel.getEmail(email);
+const getUserByEmail = async (email) => {
+  const verifyUserByEmail = await usersModel.getUserByEmail(email);
 
-  return verifyEmail;
+  return verifyUserByEmail;
+};
+
+const getPassword = async (password) => {
+  const verifyPassword = await usersModel.getPassword(password);
+
+  return verifyPassword;
 };
 
 module.exports = {
   createUser,
-  getEmail,
+  getUserByEmail,
+  getPassword,
 };

@@ -8,14 +8,22 @@ const createUser = async (email, password, name) => {
   return { user: { name, email, role: 'user', _id: newUser.insertedId } };
 };
 
-const getEmail = async (email) => {
+const getUserByEmail = async (email) => {
   const db = await connect();
-  const verifyemail = await db.collection('users').findOne({ email });
+  const user = await db.collection('users').findOne({ email });
 
-  return verifyemail;
+  return user;
+};
+
+const getPassword = async (password) => {
+  const db = await connect();
+  const verifyPassword = await db.collection('users').findOne({ password });
+
+  return verifyPassword;
 };
 
 module.exports = {
   createUser,
-  getEmail,
+  getUserByEmail,
+  getPassword,
 };
