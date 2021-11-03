@@ -1,16 +1,17 @@
-const rescue = require('express-rescue');
 const { verifyToken } = require('../auth/jwt');
 const clientError = require('../utils/clientError');
 
-const authentication = rescue((req, _res, next) => {
+const authentication = (req, _res, next) => {
   const { authorization } = req.headers;
+
   try {
     const payload = verifyToken(authorization);
     req.payload = payload; // carregar essa informação pra usar la na frente.
     } catch (_e) {
       throw clientError.unauthorized('jwt malformed');
     }
+    
   next();
-});
+};
 
 module.exports = authentication;
