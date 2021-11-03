@@ -1,15 +1,16 @@
+const rescue = require('express-rescue');
 const usersService = require('../services/usersService');
 
-const checkValidFields = (req, res, next) => {
+const checkValidFields = rescue((req, res, next) => {
   const { email, password, name } = req.body;
 
   if (!email || !password || !name) {
     return res.status(400).json({ message: 'Invalid entries. Try again.' });
   }
   next();
-};
+});
 
-const checkEmail = async (req, res, next) => {
+const checkEmail = rescue(async (req, res, next) => {
   const { email } = req.body;
   const validEmail = /^[\w.]+@[a-z]+\.\w{2,3}$/g.test(email);
   const verifyEmail = await usersService.getUserByEmail(email);
@@ -23,7 +24,7 @@ const checkEmail = async (req, res, next) => {
   }
 
   next();
-};
+});
 
 module.exports = {
   checkValidFields,
