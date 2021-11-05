@@ -7,6 +7,20 @@ const getAll = async () => {
   return recipes;
 };
 
+const getById = async (id) => {
+  if (!id || id.length < 24) {
+    throw clientError.notFound('recipe not found');
+  }
+
+  const recipe = await recipesModels.getById(id);
+
+  if (!recipe) {
+    throw clientError.notFound('recipe not found');
+  }
+
+  return recipe;
+};
+
 const createRecipes = async (name, ingredients, preparation) => {
   if (!name || !ingredients || !preparation) {
     throw clientError.badRequest('Invalid entries. Try again.');
@@ -20,4 +34,5 @@ const createRecipes = async (name, ingredients, preparation) => {
 module.exports = {
   createRecipes,
   getAll,
+  getById,
 };
