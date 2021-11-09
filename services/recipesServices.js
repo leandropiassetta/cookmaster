@@ -8,7 +8,7 @@ const getAll = async () => {
 };
 
 const getById = async (id) => {
-  if (!id || id.length < 24) {
+  if (id.length < 24) {
     throw clientError.notFound('recipe not found');
   }
 
