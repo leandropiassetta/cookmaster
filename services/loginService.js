@@ -14,7 +14,11 @@ const loginUser = async (email, password) => {
   }
   
   if (verifyUser.password === password) {
-    const token = createToken(email);
+    const { _id: id } = verifyUser;
+    
+    const token = createToken({
+      id, email: verifyUser.email, role: verifyUser.role, 
+    });
   
     return token;
   } 
