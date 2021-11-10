@@ -3,6 +3,10 @@ const clientError = require('../utils/clientError');
 
 const authentication = (req, _res, next) => {
   const { authorization } = req.headers;
+  
+  if (!authorization) {
+      throw clientError.unauthorized('missing auth token');
+  }
 
   try {
     const payload = verifyToken(authorization);
