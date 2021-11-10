@@ -21,12 +21,12 @@ const getById = async (id) => {
   return recipe;
 };
 
-const createRecipes = async (name, ingredients, preparation) => {
+const createRecipe = async (name, ingredients, preparation) => {
   if (!name || !ingredients || !preparation) {
     throw clientError.badRequest('Invalid entries. Try again.');
   }
 
-  const recipe = await recipesModels.createRecipes(name, ingredients, preparation);
+  const recipe = await recipesModels.createRecipe(name, ingredients, preparation);
 
   return recipe;
 };
@@ -37,9 +37,21 @@ const editRecipe = async ({ id, ingredients, preparation, name }, payload) => {
   return recipe;
 };
 
+const deleteRecipe = async (id, payload) => {
+  const { _id } = payload;
+  const userById = await recipesModels.getById(_id);
+
+  if (userById) {
+    const recipe = await recipesModels.deleteRecipe(id);
+  
+    return recipe;
+  }
+};
+
 module.exports = {
-  createRecipes,
+  createRecipe,
   getAll,
   getById,
   editRecipe,
+  deleteRecipe,
 };

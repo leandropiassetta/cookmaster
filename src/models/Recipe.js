@@ -14,7 +14,7 @@ const getById = async (id) => {
   return recipe;
 };
 
-const createRecipes = async (name, ingredients, preparation) => {
+const createRecipe = async (name, ingredients, preparation) => {
   const db = await connect();
   const recipe = await db.collection('recipes').insertOne({ name, ingredients, preparation });
   
@@ -32,9 +32,15 @@ const editRecipe = async ({ id, ingredients, preparation, name }, payload) => {
   return { _id: id, name, ingredients, preparation, userId: payload.id };
 };
 
+// const deleteRecipe = async (id) => {
+//   const db = await connect();
+//   await db.collection('recipes').deleteOne({ _id: ObjectId(id) });
+// };
+
 module.exports = {
-  createRecipes,
+  createRecipe,
   getAll,
   getById,
   editRecipe,
+  // deleteRecipe,
 };

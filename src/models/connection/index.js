@@ -4,6 +4,7 @@ const { MongoClient } = require('mongodb');
 
 const MONGO_DB_URL = `mongodb://${process.env.HOST || 'mongodb'}:27017/Cookmaster`;
 const DB_NAME = 'Cookmaster';
+let schema = null;
 
 const connection = () =>
 MongoClient
@@ -12,6 +13,10 @@ useNewUrlParser: true,
 useUnifiedTopology: true,
 })
 .then((conn) => conn.db(DB_NAME))
+.then((dbSchema) => {
+  schema = dbSchema;
+  return schema;
+})
 .catch((err) => {
 console.error(err);
 process.exit(1);

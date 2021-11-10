@@ -1,5 +1,5 @@
 const usersModel = require('../models/User');
-const { createToken /* verifyToken */ } = require('../auth/jwt');
+const { createToken /* verifyToken */ } = require('../api/auth/jwt');
 const clientError = require('../utils/clientError');
 
 const loginUser = async (email, password) => {
