@@ -1,5 +1,5 @@
 const express = require('express');
-const path = require('path');
+const path = require('path').resolve('./');
 
 const app = express();
 
@@ -15,7 +15,7 @@ app.get('/', (request, response) => {
 // Não remover esse end-point, ele é necessário para o avaliador
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'src', 'uploads')));
+app.use('/images', express.static(`${path}/src/uploads`));
 
 app.use('/users', routesUser);
 app.use('/login', routesLogin);

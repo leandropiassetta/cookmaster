@@ -53,7 +53,7 @@ const upload = async (id, image) => {
     await recipesModels.addImage(id, image);
   }
   const recipe = await recipesModels.getById(id);
-  console.log(recipe);
+
   return recipe;
 };
 
